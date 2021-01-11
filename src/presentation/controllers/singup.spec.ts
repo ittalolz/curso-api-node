@@ -50,11 +50,11 @@ describe('SignUp Controller', () => {
       body: {
         name: 'any_name',
         email: 'any_email@mail.com',
-        password: 'any'
+        password: 'any_password'
       }
     }
     const httpResponse = sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.body).toEqual(new MissimParamError('password'))
+    expect(httpResponse.body).toEqual(new MissimParamError('passwordConfirmation'))
   })
 })
