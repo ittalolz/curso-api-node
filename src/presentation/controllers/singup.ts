@@ -1,18 +1,14 @@
 import { HttpResponse, HttpRequest } from '../protocols/http'
 import { MissimParamError } from '../errors/missing-param-error'
+import { badRequest } from '../helpers/http-helper'
+
 export class SingUpController {
   handle (httpRequest: HttpRequest): HttpResponse {
     if (!httpRequest.body.name) {
-      return {
-        statusCode: 400,
-        body: new MissimParamError('name')
-      }
+      return badRequest(new MissimParamError('name'))
     }
     if (!httpRequest.body.email) {
-      return {
-        statusCode: 400,
-        body: new MissimParamError('email')
-      }
+      return badRequest(new MissimParamError('email'))
     }
   }
 }
