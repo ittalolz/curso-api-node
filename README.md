@@ -3,4 +3,4 @@
 
 API node created for educational purposes
 
-Udemy Course -
+Udemy Course -NodeJs, Typescript, TDD, Clean Architecture e SOLID
