@@ -69,7 +69,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse).toEqual(badRequest(new MissimParamError('name')))
   })
 
-  test('Should return 400 if no email is provided ', async () => {
+  test('Should return 400 if no email is provided', async () => {
     const { sut } = makeSut()
     const httpRequest = {
       body: {
