@@ -1,6 +1,6 @@
 import { LoginController } from './login'
 import { badRequest } from '../../helpers/http-helper'
-import { MissimParamError } from '../../errors'
+import { InvalidParamError, MissimParamError } from '../../errors'
 import { EmailValidator, HttpRequest } from '../signup/signup-protocols'
 
 const makeFakeRequest = (): HttpRequest => ({
@@ -54,6 +54,14 @@ describe('Login Controller', () => {
     }
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(badRequest(new MissimParamError('password')))
+  })
+
+  test('Deve retornar 400 se o email for invalido', async () => {
+    const { sut, emailValidatorStub } = makeSut()
+    jest.spyOn(emailValidatorStub, 'isValid').mockReturnValueOnce(false)
+    const httpRequest = makeFakeRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(badRequest(new InvalidParamError('email')))
   })
 
   test('Deve chamar EmailValidator com email correto', async () => {
