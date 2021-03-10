@@ -5,8 +5,6 @@ import { CompareFieldsValidation } from '../../presentation/helpers/validators/c
 import { EmailValilidadation } from '../../presentation/helpers/validators/email-validation'
 import { EmailValidatorAdapter } from '../../utils/email-validator-adapter'
 
-jest.mock('../../presentation/helpers/validators/validation-composite')
-
 export const makeSignUpValidation = (): ValidationComposite => {
   const validations: Validation[] = []
   for (const field of ['name', 'email', 'password', 'passwordConfirmation']) {
