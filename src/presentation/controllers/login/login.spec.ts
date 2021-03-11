@@ -47,28 +47,6 @@ const makeSut = (): SutTypes => {
 }
 
 describe('Login Controller', () => {
-  test('Deve retornar 400 se nao for fornecido email ', async () => {
-    const { sut } = makeSut()
-    const httpRequest = {
-      body: {
-        password: 'any_password'
-      }
-    }
-    const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse).toEqual(badRequest(new MissimParamError('email')))
-  })
-
-  test('Deve retornar 400 se nao for fornecido email ', async () => {
-    const { sut } = makeSut()
-    const httpRequest = {
-      body: {
-        email: 'any_email@mail.com'
-      }
-    }
-    const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse).toEqual(badRequest(new MissimParamError('password')))
-  })
-
   test('Deve retornar 500 se Authentication throws, lance erro', async () => {
     const { sut, authenticationStub } = makeSut()
     jest.spyOn(authenticationStub, 'auth').mockImplementationOnce(() => {

@@ -1,6 +1,5 @@
 import { Controller, HttpRequest, HttpResponse, Authentication } from './login-protocols'
 import { badRequest, serverError, unauthorized, ok } from '../../helpers/http-helper'
-import { MissimParamError } from '../../errors'
 import { Validation } from '@/presentation/helpers/validators/validation'
 
 export class LoginController implements Controller {
@@ -17,12 +16,6 @@ export class LoginController implements Controller {
       const error = this.validation.validate(httpRequest.body)
       if (error) {
         return badRequest(error)
-      }
-      const requeiredFields = ['email', 'password']
-      for (const field of requeiredFields) {
-        if (!httpRequest.body[field]) {
-          return badRequest(new MissimParamError(field))
-        }
       }
       const { email, password } = httpRequest.body
       const accessToken = await this.authentication.auth(email, password)
